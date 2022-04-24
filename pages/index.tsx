@@ -7,7 +7,7 @@ const Home: NextPage = () => {
   const [currentYear, setCurrentYear] = useState(0)
   const [currentMonth, setCurrentMonth] = useState('')
   const [dayOfMonth, setDayOfMonth] = useState(0)
-  const [daysInCurrentMonth, setDaysInCurrentMonth] = useState(0)
+  const [totalDaysOfMonth, setTotalDaysOfMonth] = useState([]) as Array<any>
 
   const getDaysInMonth = (year: number, month: number) => {
     return new Date(year, month, 0).getDate();
@@ -54,7 +54,7 @@ const Home: NextPage = () => {
     setCurrentYear(currentYear)
     setCurrentMonth(currentMonthName)
     setDayOfMonth(dayOfMonth)
-    setDaysInCurrentMonth(daysInCurrentMonth)
+    setTotalDaysOfMonth([...Array(daysInCurrentMonth).keys()])
   }, [])
 
   return (
@@ -65,7 +65,9 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <p>currentYear: {currentYear}, currentMonth: {currentMonth}, dayOfMonth: {dayOfMonth}</p>
-      <p>daysInCurrentMonth: {daysInCurrentMonth}</p>
+      {totalDaysOfMonth.map((day: number) => (
+        <p key={day + 1}>{day + 1}</p>
+      ))}
     </div>
   )
 }
