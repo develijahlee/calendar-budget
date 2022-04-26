@@ -10,6 +10,7 @@ const Home: NextPage = () => {
   const [totalDaysOfMonth, setTotalDaysOfMonth] = useState([]) as Array<any>
 
   const getDaysInMonth = (year: number, month: number) => {
+    console.log('year', year, 'month', month)
     return new Date(year, month, 0).getDate();
   }
 
@@ -44,19 +45,21 @@ const Home: NextPage = () => {
     }
   }
 
-  const changeCurrentYear = (param: string) => {
-    if (param === 'increase') {
-      setCurrentYear(currentYear => currentYear + 1)
-    } else if (param === 'decrease') {
-      setCurrentYear(currentYear => currentYear - 1)
-    }
-  }
-
   const changeCurrentMonth = (param: string) => {
     if (param === 'increase') {
-      setCurrentMonthCount(currentMonthCount => currentMonthCount + 1)
+      if (currentMonthCount === 12) {
+        setCurrentYear(currentYear => currentYear + 1)
+        setCurrentMonthCount(1)
+      } else {
+        setCurrentMonthCount(currentMonthCount => currentMonthCount + 1)
+      }
     } else if (param === 'decrease') {
-      setCurrentMonthCount(currentMonthCount => currentMonthCount - 1)
+      if (currentMonthCount === 1) {
+        setCurrentYear(currentYear => currentYear - 1)
+        setCurrentMonthCount(12)
+      } else {
+        setCurrentMonthCount(currentMonthCount => currentMonthCount - 1)
+      }
     }
   }
 
@@ -77,8 +80,6 @@ const Home: NextPage = () => {
       </Head>
       <p>currentYear: {currentYear}, currentMonthName: {currentMonthName}</p>
       <p>currentMonthCount: {currentMonthCount}</p>
-      <button onClick={() => changeCurrentYear('increase')}>increase currentYear</button>
-      <button onClick={() => changeCurrentYear('decrease')}>decrease currentYear</button>
       <button onClick={() => changeCurrentMonth('increase')}>increase currentMonth</button>
       <button onClick={() => changeCurrentMonth('decrease')}>decrease currentMonth</button>
       {totalDaysOfMonth.map((day: number) => (
