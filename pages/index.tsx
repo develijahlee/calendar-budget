@@ -82,9 +82,11 @@ const Home: NextPage = () => {
       <p>currentMonthCount: {currentMonthCount}</p>
       <button onClick={() => changeCurrentMonth('increase')}>increase currentMonth</button>
       <button onClick={() => changeCurrentMonth('decrease')}>decrease currentMonth</button>
-      {totalDaysOfMonth.map((day: number) => (
-        <p key={day + 1}>{day + 1}</p>
-      ))}
+      <div className={styles.calendarWrap}>
+        {totalDaysOfMonth.map((day: number) => (
+          <div key={day + 1}>{day + 1}</div>
+        ))}
+      </div>
     </div>
   )
 }
