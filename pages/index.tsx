@@ -14,45 +14,48 @@ const Home: NextPage = () => {
 
   // check how many days in a month code from https://dzone.com/articles/determining-number-days-month
   const daysInMonth = (iMonth: any, iYear: any) => {
-    return 32 - new Date(iYear, iMonth, 32).getDate();
+    return 32 - new Date(iYear, iMonth, 32).getDate()
   }
 
   useEffect(() => {
     const showCalendar = (month: any, year: any) => {
-      const firstDay = (new Date(year, month)).getDay();
+      const firstDay = (new Date(year, month)).getDay()
       const calendarBody = calendarBodyRef.current
 
       // creating all cells
       let date = 1;
       for (let i = 0; i < 6; i++) {
         // creates a table row
-        let row = document.createElement("tr");
+        const row = document.createElement("div")
+        row.classList.add(styles.row)
         //creating individual cells, filing them up with data.
         for (let j = 0; j < 7; j++) {
           if (i === 0 && j < firstDay) {
-            let cell = document.createElement("td");
-            let cellText = document.createTextNode("");
-            cell.appendChild(cellText);
-            row.appendChild(cell);
+            const cell = document.createElement("div")
+            cell.classList.add(styles.cell)
+            const cellText = document.createTextNode("")
+            cell.appendChild(cellText)
+            row.appendChild(cell)
           } else if (date > daysInMonth(month, year)) {
             break;
           } else {
-            let cell = document.createElement("td");
-            let cellText = document.createTextNode(String(date));
+            const cell = document.createElement("div")
+            cell.classList.add(styles.cell)
+            const cellText = document.createTextNode(String(date))
             if (date === today.getDate() && year === today.getFullYear() && month === today.getMonth()) {
-              cell.classList.add("bg-info");
+              cell.classList.add(styles.currentDay)
             } // color today's date
-            cell.appendChild(cellText);
-            row.appendChild(cell);
-            date++;
+            cell.appendChild(cellText)
+            row.appendChild(cell)
+            date++
           }
         }
         if (calendarBody) {
-          calendarBody.appendChild(row); // appending each row into calendar body.
+          calendarBody.appendChild(row) // appending each row into calendar body.
         }
       }
     }
-    showCalendar(currentMonth, currentYear);
+    showCalendar(currentMonth, currentYear)
   }, [currentMonth, currentYear, today])
 
   return (
