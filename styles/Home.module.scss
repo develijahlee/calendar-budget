@@ -1,13 +1,20 @@
-.container {
-  padding: 0 2rem;
-}
-
 .calendarWrap {
   border: 1px solid black;
+  margin: 0 10px;
+}
+
+.monthTitle {
+  border: 1px solid red;
+  text-align: center;
+}
+
+.daysWrap {
+  border: 1px solid blue;
   display: grid;
   grid-template-columns: repeat(7, 1fr);
-  div {
-    border: 1px solid red;
-    padding: 1rem;
+  span {
+    border: 1px solid black;
+    text-align: center;
+    padding: 10px;
   }
 }
