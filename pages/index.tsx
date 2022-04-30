@@ -1,5 +1,5 @@
 // https://medium.com/@nitinpatel_20236/challenge-of-building-a-calendar-with-pure-javascript-a86f1303267d
-import { useState, useEffect, useRef, useMemo } from 'react'
+import { useState, useRef } from 'react'
 import type { NextPage } from 'next'
 import Head from 'next/head'
 import styles from '../styles/Home.module.scss'
@@ -7,7 +7,7 @@ import styles from '../styles/Home.module.scss'
 const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
 
 const Home: NextPage = () => {
-  const today = useMemo(() => new Date(), []);
+  const today = new Date()
   const [currentMonth, setCurrentMonth] = useState(today.getMonth())
   const [currentYear, setCurrentYear] = useState(today.getFullYear())
   const calendarBodyRef = useRef<HTMLDivElement>(null)
@@ -45,9 +45,13 @@ const Home: NextPage = () => {
               return
             } else {
               const cellText = String(date)
+              let currentDay = ''
+              if (date === today.getDate() && currentYear === today.getFullYear() && currentMonth === today.getMonth()) {
+                currentDay = String(date)
+              }
               date++
               return (
-                <div key={cell} className={styles.cell}>{cellText}</div>
+                <div key={cell} className={`${styles.cell} ${currentDay === cellText ? styles.currentDay : ''}`}>{cellText}</div>
               )
             }
           })}
