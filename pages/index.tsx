@@ -46,22 +46,19 @@ const Home: NextPage = () => {
 
     return (
       <>
-        {[...Array(totalWeeks)].map((_, wIx) => {
-          return (
-            <div key={wIx} className={styles.row}>
-              {weekDays.map((_, dIx) => {
-                return (
-                  <div key={dIx} className={`${styles.cell} ${checkCurrentDay(calculateDay(wIx, dIx, firstDayInMonth)) ? styles.currentDay : ''}`}>
-                    {(wIx === 0 && dIx < firstDayInMonth) ||
-                      calculateDay(wIx, dIx, firstDayInMonth) > totalDays
-                      ? ""
-                      : calculateDay(wIx, dIx, firstDayInMonth)}
-                  </div>
-                )
-              })}
-            </div>
-          );
-        })}
+        {[...Array(totalWeeks)].map((_, wIx) => (
+          <div key={wIx} className={styles.row}>
+            {weekDays.map((_, dIx) => (
+              <div key={dIx} className={`${styles.cell} ${checkCurrentDay(calculateDay(wIx, dIx, firstDayInMonth)) ? styles.currentDay : ''}`}>
+                {(wIx === 0 && dIx < firstDayInMonth) ||
+                  calculateDay(wIx, dIx, firstDayInMonth) > totalDays
+                  ? ""
+                  : calculateDay(wIx, dIx, firstDayInMonth)}
+              </div>
+            )
+            )}
+          </div>
+        ))}
       </>
     );
   };
