@@ -5,7 +5,6 @@ import Head from 'next/head'
 import styles from '../styles/Home.module.scss'
 
 const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
-// console.log('render')
 
 const Home: NextPage = () => {
   const today = useMemo(() => new Date(), []);
@@ -13,51 +12,50 @@ const Home: NextPage = () => {
   const [currentYear, setCurrentYear] = useState(today.getFullYear())
   const calendarBodyRef = useRef<HTMLDivElement>(null)
 
+  const rows = 6
+  const cells = 7
+  const firstDay = (new Date(currentYear, currentMonth)).getDay()
+
   // check how many days in a month code from https://dzone.com/articles/determining-number-days-month
   const daysInMonth = (iMonth: number, iYear: number) => {
     return 32 - new Date(iYear, iMonth, 32).getDate()
   }
 
-  useEffect(() => {
-    const showCalendar = (month: number, year: number) => {
-      const firstDay = (new Date(year, month)).getDay()
-      const calendarBody = calendarBodyRef.current
+  const next = () => {
+    setCurrentYear((currentMonth === 11) ? currentYear + 1 : currentYear);
+    setCurrentMonth((currentMonth + 1) % 12);
+  }
 
-      // creating all cells
-      let date = 1;
-      for (let i = 0; i < 6; i++) {
-        // creates a table row
-        const row = document.createElement("div")
-        row.classList.add(styles.row)
-        //creating individual cells, filing them up with data.
-        for (let j = 0; j < 7; j++) {
-          if (i === 0 && j < firstDay) {
-            const cell = document.createElement("div")
-            cell.classList.add(styles.cell)
-            const cellText = document.createTextNode("")
-            cell.appendChild(cellText)
-            row.appendChild(cell)
-          } else if (date > daysInMonth(month, year)) {
-            break
-          } else {
-            const cell = document.createElement("div")
-            cell.classList.add(styles.cell)
-            const cellText = document.createTextNode(String(date))
-            if (date === today.getDate() && year === today.getFullYear() && month === today.getMonth()) {
-              cell.classList.add(styles.currentDay)
-            } // color today's date
-            cell.appendChild(cellText)
-            row.appendChild(cell)
-            date++
-          }
-        }
-        if (calendarBody) {
-          calendarBody.appendChild(row) // appending each row into calendar body.
-        }
-      }
-    }
-    showCalendar(currentMonth, currentYear)
-  }, [currentMonth, currentYear, today])
+  const previous = () => {
+    setCurrentYear((currentMonth === 0) ? currentYear - 1 : currentYear);
+    setCurrentMonth((currentMonth === 0) ? 11 : currentMonth - 1);
+  }
+
+  const renderCalendar = () => {
+    let date = 1;
+    return [...Array(rows).keys()].map((row) => {
+      return (
+        <div key={row} className={styles.row}>
+          {[...Array(cells).keys()].map((cell) => {
+            if (row === 0 && cell < firstDay) {
+              return (
+                <div key={cell} className={styles.cell}></div>
+              )
+            } else if (date > daysInMonth(currentMonth, currentYear)) {
+              return
+            } else {
+              const cellText = String(date)
+              date++
+              return (
+                <div key={cell} className={styles.cell}>{cellText}</div>
+              )
+            }
+          })}
+        </div>
+      )
+    })
+  }
+
 
   return (
     <>
@@ -78,7 +76,12 @@ const Home: NextPage = () => {
           <span>Sat</span>
         </div>
         <div ref={calendarBodyRef} className={styles.calendarBody}>
+          {renderCalendar()}
         </div>
+      </div>
+      <div>
+        <button onClick={previous}>Previous</button>
+        <button onClick={next}>Next</button>
       </div>
     </>
   )
