@@ -7,56 +7,64 @@ import styles from '../styles/Home.module.scss'
 const Home: NextPage = () => {
   const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
   const weekDays = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
-  const rows = 6
-  const cells = 7
   const today = new Date()
 
   const [currentMonth, setCurrentMonth] = useState(today.getMonth())
   const [currentYear, setCurrentYear] = useState(today.getFullYear())
-  const firstDay = (new Date(currentYear, currentMonth)).getDay()
 
   // check how many days in a month code from https://dzone.com/articles/determining-number-days-month
   const daysInMonth = (iMonth: number, iYear: number) => {
     return 32 - new Date(iYear, iMonth, 32).getDate()
   }
 
+  const calculateDay = (weekIndex: number, dayIndex: number, offset: number) => {
+    return 7 * (weekIndex + 1) - (6 - dayIndex) - offset
+  }
+
+  const checkCurrentDay = (date: number) => {
+    if (date === today.getDate() && currentYear === today.getFullYear() && currentMonth === today.getMonth()) {
+      return true
+    } else {
+      return false
+    }
+  }
+
   const next = () => {
-    setCurrentYear((currentMonth === 11) ? currentYear => currentYear + 1 : currentYear);
-    setCurrentMonth((currentMonth + 1) % 12);
+    setCurrentYear((currentMonth === 11) ? currentYear => currentYear + 1 : currentYear)
+    setCurrentMonth((currentMonth + 1) % 12)
   }
 
   const previous = () => {
-    setCurrentYear((currentMonth === 0) ? currentYear => currentYear - 1 : currentYear);
-    setCurrentMonth((currentMonth === 0) ? 11 : currentMonth => currentMonth - 1);
+    setCurrentYear((currentMonth === 0) ? currentYear => currentYear - 1 : currentYear)
+    setCurrentMonth((currentMonth === 0) ? 11 : currentMonth => currentMonth - 1)
   }
 
   const renderCalendar = () => {
-    let date = 1;
-    return [...Array(rows).keys()].map((row) => (
-      <div key={row} className={styles.row}>
-        {[...Array(cells).keys()].map((cell) => {
-          if (row === 0 && cell < firstDay) {
-            return (
-              <div key={cell} className={styles.cell}></div>
-            )
-          } else if (date > daysInMonth(currentMonth, currentYear)) {
-            return
-          } else {
-            const cellText = String(date)
-            let currentDay = ''
-            if (date === today.getDate() && currentYear === today.getFullYear() && currentMonth === today.getMonth()) {
-              currentDay = String(date)
-            }
-            date++
-            return (
-              <div key={cell} className={`${styles.cell} ${currentDay === cellText ? styles.currentDay : ''}`}>{cellText}</div>
-            )
-          }
+    const totalDays = daysInMonth(currentMonth, currentYear)
+    const firstDayInMonth = new Date(currentYear, currentMonth).getDay()
+    const totalWeeks = Math.ceil((firstDayInMonth + totalDays) / 7)
+
+    return (
+      <>
+        {[...Array(totalWeeks)].map((_, wIx) => {
+          return (
+            <div key={wIx} className={styles.row}>
+              {weekDays.map((_, dIx) => {
+                return (
+                  <div key={dIx} className={`${styles.cell} ${checkCurrentDay(calculateDay(wIx, dIx, firstDayInMonth)) ? styles.currentDay : ''}`}>
+                    {(wIx === 0 && dIx < firstDayInMonth) ||
+                      calculateDay(wIx, dIx, firstDayInMonth) > totalDays
+                      ? ""
+                      : calculateDay(wIx, dIx, firstDayInMonth)}
+                  </div>
+                )
+              })}
+            </div>
+          );
         })}
-      </div>
-    )
-    )
-  }
+      </>
+    );
+  };
 
 
   return (
