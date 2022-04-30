@@ -1,3 +1,4 @@
+// https://medium.com/@nitinpatel_20236/challenge-of-building-a-calendar-with-pure-javascript-a86f1303267d
 import { useState, useEffect, useRef, useMemo } from 'react'
 import type { NextPage } from 'next'
 import Head from 'next/head'
@@ -13,12 +14,12 @@ const Home: NextPage = () => {
   const calendarBodyRef = useRef<HTMLDivElement>(null)
 
   // check how many days in a month code from https://dzone.com/articles/determining-number-days-month
-  const daysInMonth = (iMonth: any, iYear: any) => {
+  const daysInMonth = (iMonth: number, iYear: number) => {
     return 32 - new Date(iYear, iMonth, 32).getDate()
   }
 
   useEffect(() => {
-    const showCalendar = (month: any, year: any) => {
+    const showCalendar = (month: number, year: number) => {
       const firstDay = (new Date(year, month)).getDay()
       const calendarBody = calendarBodyRef.current
 
@@ -37,7 +38,7 @@ const Home: NextPage = () => {
             cell.appendChild(cellText)
             row.appendChild(cell)
           } else if (date > daysInMonth(month, year)) {
-            break;
+            break
           } else {
             const cell = document.createElement("div")
             cell.classList.add(styles.cell)
@@ -77,7 +78,6 @@ const Home: NextPage = () => {
           <span>Sat</span>
         </div>
         <div ref={calendarBodyRef} className={styles.calendarBody}>
-
         </div>
       </div>
     </>
