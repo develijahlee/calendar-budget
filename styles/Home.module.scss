@@ -1,6 +1,15 @@
+.container {
+  margin: 0 10px;
+}
+
+.buttonWrap {
+  display: flex;
+  justify-content: center;
+  border: 1px solid purple;
+}
+
 .calendarWrap {
   border: 1px solid black;
-  margin: 0 10px;
 }
 
 .monthTitle {
