@@ -1,15 +1,33 @@
+@import "mixins";
+
 .container {
-  margin: 0 10px;
+  margin: 0 auto;
+  max-width: 1300px;
+  @include tablet {
+    max-width: 800px;
+  }
 }
 
 .buttonWrap {
   display: flex;
   justify-content: center;
   border: 1px solid purple;
+  button {
+    width: 80px;
+    padding: 10px;
+    &:hover {
+      cursor: pointer;
+    }
+  }
 }
 
 .calendarWrap {
   border: 1px solid black;
+  height: 93vh;
+}
+
+.calendarBody {
+  height: 100%;
 }
 
 .monthTitle {
@@ -18,13 +36,12 @@
 }
 
 .daysWrap {
-  border: 1px solid blue;
   display: grid;
   grid-template-columns: repeat(7, 1fr);
   span {
     border: 1px solid black;
     text-align: center;
-    padding: 10px;
+    padding: 10px 0;
   }
 }
 
@@ -35,11 +52,17 @@
 .row {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
+  height: 15%;
+  @include mobile {
+    height: 10vh;
+  }
 }
 
 .cell {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   border: 1px solid black;
-  padding: 10px;
   text-align: center;
 }
 

@@ -17,8 +17,9 @@ const Home: NextPage = () => {
     return 32 - new Date(iYear, iMonth, 32).getDate()
   }
 
+  // mark each day https://stackoverflow.com/questions/72065399/why-does-my-date-variable-reset-in-my-map/
   const calculateDay = (rowIndex: number, columnIndex: number, offset: number) => {
-    return 7 * (rowIndex + 1) - (6 - columnIndex) - offset
+    return 7 * rowIndex + columnIndex + 1 - offset
   }
 
   const checkCurrentDay = (date: number) => {
