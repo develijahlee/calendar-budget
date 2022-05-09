@@ -22,7 +22,7 @@
 }
 
 .calendarWrap {
-  border: 1px solid black;
+  border: 1px solid red;
   height: 93vh;
 }
 
@@ -52,7 +52,7 @@
 .row {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
-  height: 15%;
+  height: 12%;
   @include mobile {
     height: 10vh;
   }
