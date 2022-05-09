@@ -53,10 +53,10 @@ const Home: NextPage = () => {
               const calculatedDay = calculateDay(rowIndex, columnIndex, firstDayInMonth)
               return (
                 <div key={columnIndex} className={`${styles.cell} ${checkCurrentDay(calculatedDay) ? styles.currentDay : ''}`}>
-                  {(rowIndex === 0 && columnIndex < firstDayInMonth) ? '' :
+                  {(rowIndex === 0 && columnIndex < firstDayInMonth) ||
                     calculatedDay > totalDays
-                    ? <span>{Math.abs(totalDays - calculatedDay)}</span>
-                    : <span>{calculatedDay}</span>}
+                    ? ""
+                    : calculatedDay}
                 </div>
               )
             })}
