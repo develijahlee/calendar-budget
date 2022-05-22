@@ -2,7 +2,16 @@ import { useState } from 'react'
 import styles from '../styles/Home.module.scss'
 import Popup from './popup'
 
-const Day = ({ columnIndex, rowIndex, firstDayInMonth, calculatedDay, totalDays, checkCurrentDay }: any) => {
+interface DayProps {
+  columnIndex: number
+  rowIndex: number
+  firstDayInMonth: number
+  calculatedDay: number
+  totalDays: number
+  checkCurrentDay: (date: number) => boolean
+}
+
+const Day = ({ columnIndex, rowIndex, firstDayInMonth, calculatedDay, totalDays, checkCurrentDay }: DayProps) => {
   const [openPopup, setOpenPopup] = useState(false)
   const onClick = () => {
     setOpenPopup(true)

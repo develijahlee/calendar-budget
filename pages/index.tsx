@@ -53,7 +53,7 @@ const Home: NextPage = () => {
             {weekDays.map((_, columnIndex) => {
               const calculatedDay = calculateDay(rowIndex, columnIndex, firstDayInMonth)
               return (
-                <Day key={rowIndex + columnIndex} columnIndex={columnIndex} firstDayInMonth={firstDayInMonth} calculatedDay={calculatedDay} totalDays={totalDays} checkCurrentDay={checkCurrentDay} />
+                <Day key={rowIndex + columnIndex} columnIndex={columnIndex} rowIndex={rowIndex} firstDayInMonth={firstDayInMonth} calculatedDay={calculatedDay} totalDays={totalDays} checkCurrentDay={checkCurrentDay} />
               )
             })}
           </div>

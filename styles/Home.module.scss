@@ -64,6 +64,9 @@
   align-items: center;
   border: 1px solid black;
   text-align: center;
+  &:hover {
+    cursor: pointer;
+  }
 }
 
 .currentDay {
@@ -79,4 +82,7 @@
   height: 400px;
   margin-top: -200px;
   margin-left: -200px;
+  &:hover {
+    cursor: pointer;
+  }
 }

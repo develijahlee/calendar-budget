@@ -1,6 +1,11 @@
+import { Dispatch, SetStateAction } from 'react'
 import styles from '../styles/Home.module.scss'
 
-const Popup = ({ setOpenPopup }: any) => {
+interface PopupProps {
+  setOpenPopup: Dispatch<SetStateAction<boolean>>
+}
+
+const Popup = ({ setOpenPopup }: PopupProps) => {
 
   const onClick = () => {
     setOpenPopup(false)
