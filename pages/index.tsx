@@ -3,6 +3,7 @@ import { useState } from 'react'
 import type { NextPage } from 'next'
 import Head from 'next/head'
 import styles from '../styles/Home.module.scss'
+import Day from '../components/day'
 
 const Home: NextPage = () => {
   const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
@@ -52,12 +53,7 @@ const Home: NextPage = () => {
             {weekDays.map((_, columnIndex) => {
               const calculatedDay = calculateDay(rowIndex, columnIndex, firstDayInMonth)
               return (
-                <div key={columnIndex} className={`${styles.cell} ${checkCurrentDay(calculatedDay) ? styles.currentDay : ''}`}>
-                  {(rowIndex === 0 && columnIndex < firstDayInMonth) ||
-                    calculatedDay > totalDays
-                    ? ""
-                    : calculatedDay}
-                </div>
+                <Day key={rowIndex + columnIndex} columnIndex={columnIndex} firstDayInMonth={firstDayInMonth} calculatedDay={calculatedDay} totalDays={totalDays} checkCurrentDay={checkCurrentDay} />
               )
             })}
           </div>
