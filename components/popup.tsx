@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction } from 'react'
+import { Dispatch, SetStateAction, useState } from 'react'
 import styles from '../styles/Home.module.scss'
 
 interface PopupProps {
@@ -6,12 +6,29 @@ interface PopupProps {
 }
 
 const Popup = ({ setOpenPopup }: PopupProps) => {
+  const [dailyTotal, setDailyTotal] = useState(0)
 
   const onClick = () => {
     setOpenPopup(false)
   }
+
   return (
-    <div onClick={onClick} className={styles.popup}><p>test</p></div>
+    <div className={styles.popup}>
+      <button className={styles.popupCloseBtn} onClick={onClick}>Close</button>
+      <div className={styles.totalWrapper}>
+        <p>Daily Total: {dailyTotal}</p>
+        <div>
+          <input type="text" />
+          <select name="spending">
+            <option value="">Spending Type</option>
+            <option value="food">Food</option>
+            <option value="utilities">Utilities</option>
+            <option value="leisure">Leisure</option>
+          </select>
+          <button>Submit</button>
+        </div>
+      </div>
+    </div>
   )
 }
 

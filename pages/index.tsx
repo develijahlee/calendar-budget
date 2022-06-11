@@ -12,6 +12,7 @@ const Home: NextPage = () => {
 
   const [currentMonth, setCurrentMonth] = useState(today.getMonth())
   const [currentYear, setCurrentYear] = useState(today.getFullYear())
+  const [monthlyTotal, setMonthTotal] = useState(0)
 
   // check how many days in a month code from https://dzone.com/articles/determining-number-days-month
   const daysInMonth = (iMonth: number, iYear: number) => {
@@ -76,6 +77,7 @@ const Home: NextPage = () => {
       </div>
       <div className={styles.calendarWrap}>
         <h2 className={styles.monthTitle}>{months[currentMonth]} {currentYear}</h2>
+        <h3 className={styles.monthlyTotal}>Monthly Total Spent: {monthlyTotal}</h3>
         <div className={styles.daysWrap}>
           {weekDays.map((day) => (
             <span key={day}>{day}</span>

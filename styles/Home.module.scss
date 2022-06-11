@@ -1,6 +1,7 @@
 @import "mixins";
 
 .container {
+  position: relative;
   margin: 0 auto;
   max-width: 1300px;
   @include tablet {
@@ -10,8 +11,7 @@
 
 .buttonWrap {
   display: flex;
-  justify-content: center;
-  border: 1px solid purple;
+  justify-content: end;
   button {
     width: 80px;
     padding: 10px;
@@ -22,7 +22,6 @@
 }
 
 .calendarWrap {
-  border: 1px solid red;
   height: 93vh;
 }
 
@@ -31,7 +30,10 @@
 }
 
 .monthTitle {
-  border: 1px solid red;
+  text-align: center;
+}
+
+.monthlyTotal {
   text-align: center;
 }
 
@@ -74,15 +76,29 @@
 }
 
 .popup {
-  background: black;
   position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 400px;
-  height: 400px;
-  margin-top: -200px;
-  margin-left: -200px;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  border: 1px solid black;
+  background: #fff;
+}
+
+.popupCloseBtn {
+  height: 50px;
+  width: 50px;
+  position: absolute;
+  top: 0;
+  right: 0;
   &:hover {
     cursor: pointer;
   }
+}
+
+.totalWrapper {
+  margin-top: 50px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
