@@ -6,11 +6,17 @@ interface PopupProps {
 }
 
 const Popup = ({ setOpenPopup }: PopupProps) => {
+  const [value, setValue] = useState("");
   const [dailyTotal, setDailyTotal] = useState(0)
 
   const onClick = () => {
     setOpenPopup(false)
   }
+
+  const handleChange = (event: any) => {
+    const result = event.target.value.replace(/\D/g, '');
+    setValue(result);
+  };
 
   return (
     <div className={styles.popup}>
@@ -18,7 +24,7 @@ const Popup = ({ setOpenPopup }: PopupProps) => {
       <div className={styles.totalWrapper}>
         <p>Daily Total: {dailyTotal}</p>
         <div>
-          <input type="text" />
+          <input value={new Intl.NumberFormat('ko-KR', { style: 'currency', currency: 'KRW' }).format(Number(value))} onChange={handleChange} type="text" />
           <select name="spending">
             <option value="">Spending Type</option>
             <option value="food">Food</option>
