@@ -1,11 +1,13 @@
-import { Dispatch, SetStateAction, useState } from 'react'
+import { Dispatch, ChangeEvent, SetStateAction, useState } from 'react'
 import styles from '../styles/Home.module.scss'
+import Dropdown from './dropdown'
 
 interface PopupProps {
   setOpenPopup: Dispatch<SetStateAction<boolean>>
 }
 
 const Popup = ({ setOpenPopup }: PopupProps) => {
+  const spendingOptions = ['Food', 'Utitlies', 'Leisure']
   const [value, setValue] = useState("");
   const [dailyTotal, setDailyTotal] = useState(0)
 
@@ -13,7 +15,7 @@ const Popup = ({ setOpenPopup }: PopupProps) => {
     setOpenPopup(false)
   }
 
-  const handleChange = (event: any) => {
+  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     const result = event.target.value.replace(/\D/g, '');
     setValue(result);
   };
@@ -25,12 +27,7 @@ const Popup = ({ setOpenPopup }: PopupProps) => {
         <p>Daily Total: {dailyTotal}</p>
         <div>
           <input value={new Intl.NumberFormat('ko-KR', { style: 'currency', currency: 'KRW' }).format(Number(value))} onChange={handleChange} type="text" />
-          <select name="spending">
-            <option value="">Spending Type</option>
-            <option value="food">Food</option>
-            <option value="utilities">Utilities</option>
-            <option value="leisure">Leisure</option>
-          </select>
+          <Dropdown label="Spending Type" options={spendingOptions} />
           <button>Submit</button>
         </div>
       </div>
