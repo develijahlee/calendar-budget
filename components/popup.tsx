@@ -25,7 +25,7 @@ const Popup = ({ setOpenPopup }: PopupProps) => {
       <button className={styles.popupCloseBtn} onClick={onClick}>Close</button>
       <div className={styles.totalWrapper}>
         <p>Daily Total: {dailyTotal}</p>
-        <div>
+        <div className={styles.inputWrapper}>
           <input value={new Intl.NumberFormat('ko-KR', { style: 'currency', currency: 'KRW' }).format(Number(value))} onChange={handleChange} type="text" />
           <Dropdown label="Spending Type" options={spendingOptions} />
           <button>Submit</button>

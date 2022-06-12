@@ -103,7 +103,20 @@
   align-items: center;
 }
 
+.inputWrapper {
+  display: flex;
+  input {
+    height: 100%;
+    max-height: 50px;
+  }
+  button {
+    height: 100%;
+    max-height: 50px;
+  }
+}
+
 .dropdown {
+  width: 150px;
   border: 1px solid black;
   &:hover {
     cursor: pointer;
