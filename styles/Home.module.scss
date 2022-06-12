@@ -126,3 +126,7 @@
 .hiddenOption {
   display: none;
 }
+
+.unclickableDay {
+  pointer-events: none;
+}

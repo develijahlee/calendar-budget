@@ -18,7 +18,7 @@ const Day = ({ columnIndex, rowIndex, firstDayInMonth, calculatedDay, totalDays,
   }
   return (
     <>
-      <div onClick={onClick} key={columnIndex} className={`${styles.cell} ${checkCurrentDay(calculatedDay) ? styles.currentDay : ''}`}>
+      <div onClick={onClick} key={columnIndex} className={`${styles.cell} ${checkCurrentDay(calculatedDay) && styles.currentDay} ${((rowIndex === 0 && columnIndex < firstDayInMonth) || (calculatedDay > totalDays)) && styles.unclickableDay}`}>
         {(rowIndex === 0 && columnIndex < firstDayInMonth) ||
           calculatedDay > totalDays
           ? ""
