@@ -1,0 +1,11 @@
+.dropdown {
+  width: 150px;
+  border: 1px solid black;
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.hiddenOption {
+  display: none;
+}

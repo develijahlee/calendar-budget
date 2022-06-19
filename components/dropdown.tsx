@@ -1,4 +1,4 @@
-import styles from '../styles/Home.module.scss'
+import styles from './dropdown.module.scss'
 import { useState } from 'react'
 
 interface DropdownProps {

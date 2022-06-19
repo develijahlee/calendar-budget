@@ -1,0 +1,46 @@
+.popup {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  border: 1px solid black;
+  background: #fff;
+}
+
+.popupCloseBtn {
+  height: 50px;
+  width: 50px;
+  position: absolute;
+  top: 0;
+  right: 0;
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.totalWrapper {
+  margin-top: 50px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.inputWrapper {
+  display: flex;
+  input {
+    height: 100%;
+    max-height: 50px;
+  }
+  button {
+    height: 100%;
+    max-height: 50px;
+  }
+}
+
+.test {
+  display: flex;
+  p {
+    margin-right: 20px;
+  }
+}

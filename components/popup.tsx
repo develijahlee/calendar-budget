@@ -1,5 +1,5 @@
 import { Dispatch, ChangeEvent, SetStateAction, useState } from 'react'
-import styles from '../styles/Home.module.scss'
+import styles from './popup.module.scss'
 import Dropdown from './dropdown'
 
 interface PopupProps {
@@ -25,6 +25,10 @@ const Popup = ({ setOpenPopup }: PopupProps) => {
       <button className={styles.popupCloseBtn} onClick={onClick}>Close</button>
       <div className={styles.totalWrapper}>
         <p>Daily Total: {dailyTotal}</p>
+        <div className={styles.test}>
+          <p>Amount</p>
+          <p>Spending Type</p>
+        </div>
         <div className={styles.inputWrapper}>
           <input value={new Intl.NumberFormat('ko-KR', { style: 'currency', currency: 'KRW' }).format(Number(value))} onChange={handleChange} type="text" />
           <Dropdown label="Spending Type" options={spendingOptions} />

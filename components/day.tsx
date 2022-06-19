@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import styles from '../styles/Home.module.scss'
+import styles from './day.module.scss'
 import Popup from './popup'
 
 interface DayProps {
