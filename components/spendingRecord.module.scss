@@ -1,0 +1,26 @@
+.dropdown {
+  width: 150px;
+  border: 1px solid black;
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.hiddenOption {
+  display: none;
+}
+
+.inputWrapper {
+  display: flex;
+  &:not(:nth-child(2)) {
+    margin-top: 20px;
+  }
+  input {
+    height: 100%;
+    max-height: 50px;
+  }
+  button {
+    height: 100%;
+    max-height: 50px;
+  }
+}

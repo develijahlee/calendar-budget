@@ -1,39 +1,35 @@
-import { Dispatch, ChangeEvent, SetStateAction, useState } from 'react'
+import React, { Dispatch, SetStateAction, useState, useEffect } from 'react'
 import styles from './popup.module.scss'
-import Dropdown from './dropdown'
+import Dropdown from './spendingRecord'
 
 interface PopupProps {
   setOpenPopup: Dispatch<SetStateAction<boolean>>
 }
 
 const Popup = ({ setOpenPopup }: PopupProps) => {
+  const [spendingList, setSpendingList] = useState([])
   const spendingOptions = ['Food', 'Utitlies', 'Leisure']
-  const [value, setValue] = useState("");
   const [dailyTotal, setDailyTotal] = useState(0)
 
   const onClick = () => {
     setOpenPopup(false)
   }
 
-  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
-    const result = event.target.value.replace(/\D/g, '');
-    setValue(result);
-  };
+  useEffect(() => {
+    console.log('spendingList', spendingList)
+  }, [spendingList])
 
   return (
     <div className={styles.popup}>
       <button className={styles.popupCloseBtn} onClick={onClick}>Close</button>
       <div className={styles.totalWrapper}>
         <p>Daily Total: {dailyTotal}</p>
-        <div className={styles.test}>
-          <p>Amount</p>
-          <p>Spending Type</p>
-        </div>
-        <div className={styles.inputWrapper}>
-          <input value={new Intl.NumberFormat('ko-KR', { style: 'currency', currency: 'KRW' }).format(Number(value))} onChange={handleChange} type="text" />
-          <Dropdown label="Spending Type" options={spendingOptions} />
-          <button>Submit</button>
-        </div>
+        <Dropdown label="Spending Type" options={spendingOptions} setSpendingList={setSpendingList} setDailyTotal={setDailyTotal} />
+        {spendingList.map((_, i) => (
+          <React.Fragment key={i}>
+            <Dropdown label="Spending Type" options={spendingOptions} setSpendingList={setSpendingList} setDailyTotal={setDailyTotal} />
+          </React.Fragment>
+        ))}
       </div>
     </div>
   )
