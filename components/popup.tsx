@@ -1,13 +1,13 @@
 import React, { Dispatch, SetStateAction, useState, useEffect } from 'react'
 import styles from './popup.module.scss'
-import Dropdown from './spendingRecord'
+import SpendingRecord from './spendingRecord'
 
 interface PopupProps {
   setOpenPopup: Dispatch<SetStateAction<boolean>>
 }
 
 const Popup = ({ setOpenPopup }: PopupProps) => {
-  const [spendingList, setSpendingList] = useState([])
+  const [spendingList, setSpendingList] = useState<Array<object>>([])
   const spendingOptions = ['Food', 'Utitlies', 'Leisure']
   const [dailyTotal, setDailyTotal] = useState(0)
 
@@ -24,10 +24,10 @@ const Popup = ({ setOpenPopup }: PopupProps) => {
       <button className={styles.popupCloseBtn} onClick={onClick}>Close</button>
       <div className={styles.totalWrapper}>
         <p>Daily Total: {dailyTotal}</p>
-        <Dropdown label="Spending Type" options={spendingOptions} setSpendingList={setSpendingList} setDailyTotal={setDailyTotal} />
+        <SpendingRecord label="Spending Type" options={spendingOptions} setSpendingList={setSpendingList} setDailyTotal={setDailyTotal} />
         {spendingList.map((_, i) => (
           <React.Fragment key={i}>
-            <Dropdown label="Spending Type" options={spendingOptions} setSpendingList={setSpendingList} setDailyTotal={setDailyTotal} />
+            <SpendingRecord label="Spending Type" options={spendingOptions} setSpendingList={setSpendingList} setDailyTotal={setDailyTotal} />
           </React.Fragment>
         ))}
       </div>

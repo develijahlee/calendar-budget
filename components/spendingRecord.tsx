@@ -4,7 +4,7 @@ import { Dispatch, ChangeEvent, SetStateAction, useState } from 'react'
 interface SpendingRecordProps {
   label: string,
   options: string[]
-  setSpendingList: Dispatch<SetStateAction<any>>
+  setSpendingList: Dispatch<SetStateAction<Array<object>>>
   setDailyTotal: Dispatch<SetStateAction<number>>
 }
 
